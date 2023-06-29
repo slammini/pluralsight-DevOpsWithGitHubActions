@@ -43,7 +43,7 @@ jobs:
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
         with:
-          scope: resourceGroup
+          scope: resourcegroup
           resourceGroupName: pluralsight-tests
           region: westeurope
           template: ./arm-templates/storageaccount.json
