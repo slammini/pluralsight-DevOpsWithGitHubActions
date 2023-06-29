@@ -57,9 +57,21 @@ jobs:
             location=eastus
           deploymentName: pluralsight-tests-storageaccount
 
-      # Execute a comand to print the output of the storage account template
-      - name: Print Storage Account Output
-        run: echo "The storage account name is ${{ steps.storageAccountDeploy.outputs.BlobUri }}"
+      # Deploy the ARM template for the virtual machine in vm.json
+      - name: Deploy Virtual Machine
+        uses: Azure/arm-deploy@v1
+        id: vmDeploy
+        with:
+          scope: resourcegroup
+          resourceGroupName: pluralsight-tst-rg
+          region: westeurope
+          template: ./arm-templates/vm.json
+          parameters: 
+            adminPassword="P@ssw0rd1234!"
+          deploymentName: pluralsight-tests-vm
+      
+
+
 
 
 
