@@ -7,7 +7,7 @@ on:
   # Run everytime there is a push to the main branch
   push:
     branches: [ main ]
-    
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -28,13 +28,16 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
-      # Deploy ARM Template using Azure CLI
-      - name: Deploy Resource group with AZ CLI
-        uses: Azure/cli@v1.0.7
+
+      # Deploy the ARM template using deploy arm action
+      - name: Deploy Resource Group
+        uses: Azure/arm-deploy@v1
         with:
-          inlineScript: |
-            az deployment sub create --location westeurope --template-file ./arm-templates/resourcegroup.json
+          scope: subscription
+          subscriptionId: 79e4eefb-1e09-45c9-b0e7-0860842835dd
+          region: westeurope
+          template: .arm-template/resourcegroup.json
+          deploymentName: pluralsight-tests
 
 
 

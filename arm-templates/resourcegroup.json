@@ -16,7 +16,7 @@
         // resource group name
         "resourceGroupName": {
             "type": "string",
-            "defaultValue": "myResourceGroup",
+            "defaultValue": "pluralsight-tst-rg",
             "metadata": {
                 "description": "Resource group name."
             }
