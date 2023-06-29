@@ -1,0 +1,39 @@
+# Create a workflow file to deploy Azure bicep templates with GitHub Actions
+name: Deploy Azure bicep templates
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        name: Build and deploy Azure bicep templates
+        env:
+            resource_group_name: borramequesoyelbicep
+            location: westeurope
+
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Set up Azure CLI
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}       
+
+        - name: Build and deploy Azure bicep templates
+          uses: azure/CLI@v1
+          with:
+            azcliversion: 2.26.1
+            inlineScript: |
+                az deployment sub create --location ${{ env.location }} --template-file ./main.bicep --name ${{ env.resource_group_name }} --confirm-with-what-if
+
+        # Deploy the virtual network bicpe template
+        - name: Deploy virtual network
+          uses: azure/CLI@v1
+          with:
+            azcliversion: 2.26.1
+            inlineScript: |
+                az deployment group create --resource-group ${{ env.resource_group_name }} --template-file ./virtualnetwork.bicep --name ${{ env.resource_group_name }} --confirm-with-what-if
+
