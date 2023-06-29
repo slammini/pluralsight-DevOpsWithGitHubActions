@@ -48,7 +48,7 @@ jobs:
           parameters: 
             resourceGroupName=${{env.resource_group_name}}
             location="${{env.location}}"
-          deploymentName: pluralsight-tests
+          deploymentName: pstg-luralsight-tests
 
       # Deploy the ARM template for the storage account using deploy arm action
       - name: Deploy Storage Account
@@ -63,7 +63,7 @@ jobs:
             storageAccountSku=Standard_LRS
             storageAccountName=stgv2globalbosg0028
             location=eastus
-          deploymentName: pluralsight-tests-storageaccount
+          deploymentName: stg-pluralsight-tests-storageaccount
 
       # Deploy the ARM template for the virtual machine in vm.json
       - name: Deploy Virtual Machine
@@ -77,7 +77,7 @@ jobs:
           parameters: 
             adminPassword=${{secrets.UBUNTU_ADMIN_PASSWORD}}
             location="${{env.location}}"
-          deploymentName: pluralsight-tests-vm
+          deploymentName: stg-pluralsight-tests-vm
 
   armDeployProduction:
     name: Deploy to Production
@@ -113,7 +113,7 @@ jobs:
           parameters: 
             resourceGroupName=${{env.resource_group_name}}
             location="${{env.location}}"
-          deploymentName: pluralsight-tests
+          deploymentName: prod-pluralsight-tests
 
       # Deploy the ARM template for the storage account using deploy arm action
       - name: Deploy Storage Account
@@ -128,7 +128,7 @@ jobs:
             storageAccountSku=Standard_LRS
             storageAccountName=prodv2globalbosg0028
             location=eastus
-          deploymentName: pluralsight-tests-storageaccount
+          deploymentName: prod-pluralsight-tests-storageaccount
 
       # Deploy the ARM template for the virtual machine in vm.json
       - name: Deploy Virtual Machine
@@ -142,4 +142,4 @@ jobs:
           parameters: 
             adminPassword=${{secrets.UBUNTU_ADMIN_PASSWORD}}
             location="${{env.location}}"
-          deploymentName: pluralsight-tests-vm
+          deploymentName: prod-pluralsight-tests-vm
