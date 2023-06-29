@@ -47,7 +47,10 @@ jobs:
           resourceGroupName: pluralsight-tst-rg
           region: westeurope
           template: ./arm-templates/storageaccount.json
-          parameters: ./arm-templates/storageaccount.parameters.json
+          parameters: 
+            ./arm-templates/storageaccount.parameters.json
+            storageAccountName=v2globalbosg0028598459854798
+            location=westeurope
           deploymentName: pluralsight-tests-storageaccount
 
 
