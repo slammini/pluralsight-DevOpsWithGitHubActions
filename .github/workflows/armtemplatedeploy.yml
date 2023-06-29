@@ -67,7 +67,7 @@ jobs:
           region: westeurope
           template: ./arm-templates/vm.json
           parameters: 
-            adminPassword="P@ssw0rd1234!"
+            adminPassword=${{secrets.UBUNTU_ADMIN_PASSWORD}}
           deploymentName: pluralsight-tests-vm
       
 
