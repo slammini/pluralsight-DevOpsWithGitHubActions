@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 env:
   resource_group_name: pluralsight-tst-rg
-  location: westus2
+  location: westeurope
   
 jobs:
   # This workflow contains a single job called "armDeplo"
