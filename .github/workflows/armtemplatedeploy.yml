@@ -12,6 +12,10 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+env:
+  resource_group_name: pluralsight-tst-rg
+  location: "Australia East"
+  
 jobs:
   # This workflow contains a single job called "armDeplo"
   armDeploy:
@@ -35,11 +39,11 @@ jobs:
         with:
           scope: subscription
           subscriptionId: 79e4eefb-1e09-45c9-b0e7-0860842835dd
-          region: westeurope
+          region: ${{env.location}}
           template: ./arm-templates/resourcegroup.json
           parameters: 
-            resourceGroupName=pluralsight-tst-rg
-            location=westeurope
+            resourceGroupName=${{env.resource_group_name}}
+            location=${{env.location}}
           deploymentName: pluralsight-tests
 
       # Deploy the ARM template for the storage account using deploy arm action
@@ -48,8 +52,8 @@ jobs:
         id: storageAccountDeploy
         with:
           scope: resourcegroup
-          resourceGroupName: pluralsight-tst-rg
-          region: westeurope
+          resourceGroupName: ${{env.resource_group_name}}
+          region: ${{env.location}}
           template: ./arm-templates/storageaccount.json
           parameters: 
             storageAccountSku=Standard_LRS
@@ -63,11 +67,12 @@ jobs:
         id: vmDeploy
         with:
           scope: resourcegroup
-          resourceGroupName: pluralsight-tst-rg
-          region: westeurope
+          resourceGroupName: ${{env.resource_group_name}}
+          region: ${{env.location}}
           template: ./arm-templates/vm.json
           parameters: 
             adminPassword=${{secrets.UBUNTU_ADMIN_PASSWORD}}
+            location=${{env.location}}
           deploymentName: pluralsight-tests-vm
       
 
