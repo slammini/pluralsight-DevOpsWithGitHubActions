@@ -36,7 +36,7 @@ jobs:
           scope: subscription
           subscriptionId: 79e4eefb-1e09-45c9-b0e7-0860842835dd
           region: westeurope
-          template: .arm-template/resourcegroup.json
+          template: ./arm-template/resourcegroup.json
           deploymentName: pluralsight-tests
 
 
