@@ -49,8 +49,8 @@ jobs:
           template: ./arm-templates/storageaccount.json
           parameters: 
             ./arm-templates/storageaccount.parameters.json
-            storageAccountName=v2globalbosg0028598459854798
-            location=westeurope
+            storageAccountName=v2globalbosg0028
+            location=eastus
           deploymentName: pluralsight-tests-storageaccount
 
 
