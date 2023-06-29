@@ -37,21 +37,31 @@ jobs:
           subscriptionId: 79e4eefb-1e09-45c9-b0e7-0860842835dd
           region: westeurope
           template: ./arm-templates/resourcegroup.json
+          parameters: 
+            resourceGroupName=pluralsight-tst-rg
+            location=westeurope
           deploymentName: pluralsight-tests
 
       # Deploy the ARM template for the storage account using deploy arm action
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
         with:
           scope: resourcegroup
           resourceGroupName: pluralsight-tst-rg
           region: westeurope
           template: ./arm-templates/storageaccount.json
           parameters: 
-            ./arm-templates/storageaccount.parameters.json
+            storageAccountSku=Standard_LRS
             storageAccountName=v2globalbosg0028
             location=eastus
           deploymentName: pluralsight-tests-storageaccount
+
+      # Execute a comand to print the output of the storage account template
+      - name: Print Storage Account Output
+        run: echo "The storage account name is ${{ steps.storageAccountDeploy.outputs.BlobUri }}"
+
+
 
 
 
